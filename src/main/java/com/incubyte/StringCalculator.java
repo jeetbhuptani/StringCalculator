@@ -1,5 +1,8 @@
 package com.incubyte;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringCalculator {
     public int add(String numbers){
 
@@ -19,10 +22,20 @@ public class StringCalculator {
 
         String[] parts = numbers.split(delimiter);
         int sum = 0;
+        // Step 5 - Throw Exception on Negative values and return if more than one
+        List<Integer> negatives = new ArrayList<>();
+
         for(String part: parts){
             // Solution - for: ',' and '\n' possible next to next causing empty("") string
             if(part.trim().isEmpty()) continue;
-            sum += Integer.parseInt(part);
+            // Collect negative values
+            int num = Integer.parseInt(part.trim());
+            if(num < 0) negatives.add(num);
+            sum += num;
+        }
+
+        if(!negatives.isEmpty()){
+            throw new IllegalArgumentException("negative numbers not allowed "+negatives.toString());
         }
         return sum;
     }
