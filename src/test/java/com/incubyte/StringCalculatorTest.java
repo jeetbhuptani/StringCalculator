@@ -1,9 +1,6 @@
 package com.incubyte;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.regex.PatternSyntaxException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
