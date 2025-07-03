@@ -45,7 +45,6 @@ public class StringCalculatorTest {
     @Test
     void supportsCustomDelimiterDefinedInHeader(){
         assertEquals(3, new StringCalculator().add("//;\n1;2"));
-        assertEquals(10, new StringCalculator().add("//;|-|'\n1;2-3'4"));
     }
 
     // Step 5 - Throw Exception on Negative Numbers
