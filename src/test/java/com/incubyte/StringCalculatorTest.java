@@ -29,7 +29,7 @@ public class StringCalculatorTest {
     // Step 2 - Allow any number of numbers
     @Test
     void handlesLargeSumWithoutOverflow() {
-        assertEquals(2_000_001L, new StringCalculator().add("1,".repeat(2_000_000)));
+        assertEquals(2_000_000L, new StringCalculator().add("1,".repeat(2_000_000)));
     }
 
     // Step 3 - Allow to handle \n (new lines) between numbers

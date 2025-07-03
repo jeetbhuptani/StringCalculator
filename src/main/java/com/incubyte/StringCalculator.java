@@ -24,17 +24,7 @@ public class StringCalculator {
             int newlineIndex = numbers.indexOf("\n");
             String delimiterPart = numbers.substring(2, newlineIndex);
             numbers = numbers.substring(newlineIndex + 1);
-
-            if(delimiterPart.startsWith("[") && delimiterPart.endsWith("]")){
-                List<String> delimiters = new ArrayList<>();
-                Matcher m = Pattern.compile("\\[(.*?)]").matcher(delimiterPart);
-                while(m.find())
-                    delimiters.add(Pattern.quote(m.group(1)));
-                delimiter = String.join("|", delimiters);
-            } else {
-                delimiter = Pattern.quote(delimiterPart);
-                System.out.println(delimiterPart);
-            }
+            delimiter = extractDelimiters(delimiterPart);
         }
 
         String[] parts = numbers.split(delimiter);
@@ -52,7 +42,7 @@ public class StringCalculator {
         }
 
         if(!negatives.isEmpty()){
-            throw new IllegalArgumentException("negative numbers not allowed "+negatives.toString());
+            throw new IllegalArgumentException("negative numbers not allowed "+ negatives);
         }
         return sum;
     }
@@ -60,5 +50,17 @@ public class StringCalculator {
     // Step 7 - To return the count of add() method invocations
     public int getCalledCount() {
         return callCount;
+    }
+
+    // Delimiters Extraction
+    private String extractDelimiters(String delimiterPart) {
+        if(delimiterPart.startsWith("[") && delimiterPart.endsWith("]")){
+            List<String> delimiters = new ArrayList<>();
+            Matcher m = Pattern.compile("\\[(.*?)]").matcher(delimiterPart);
+            while(m.find())
+                delimiters.add(Pattern.quote(m.group(1)));
+            return String.join("|", delimiters);
+        } else
+            return Pattern.quote(delimiterPart);
     }
 }
