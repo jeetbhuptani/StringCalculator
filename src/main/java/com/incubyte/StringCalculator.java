@@ -33,6 +33,8 @@ public class StringCalculator {
         List<Integer> negatives = new ArrayList<>();
 
         for(String part: parts){
+            // Handles string with no numbers;
+            if(part.isEmpty()) continue;
             // Collect negative values
             int num = Integer.parseInt(part.trim());
             if(num < 0) negatives.add(num);

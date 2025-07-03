@@ -46,6 +46,7 @@ public class StringCalculatorTest {
         assertEquals(3, new StringCalculator().add("//;\n1;2"));
     }
 
+    // Negative test
     // Step 5 - Throw Exception on Negative Numbers
     // Step 6 - Return the numbers if multiple negative numbers
     @Test
@@ -89,6 +90,18 @@ public class StringCalculatorTest {
         assertEquals(6, new StringCalculator().add("//[**][%%]\n1**2%%3"));
     }
 
+    // Delimiters without Numbers
+    @Test
+    void handlesOnlyCustomDelimiterHeader() {
+        assertEquals(0, new StringCalculator().add("//;\n"));
+    }
+
+    // Numbers with space
+    @Test
+    void handlesWhitespaceBetweenNumbers() {
+        assertEquals(6, new StringCalculator().add("1, 2, 3"));
+    }
+
     // NEGATIVE TEST CASES
     // Contains alphabets
     @Test
@@ -100,5 +113,11 @@ public class StringCalculatorTest {
     @Test
     void doesNotAcceptMultipleUnbracketedMultiCharDelimiter() {
         assertThrows(IllegalArgumentException.class, () -> new StringCalculator().add("//***\n1***2***3"));
+    }
+
+    // Null Input
+    @Test
+    void throwsExceptionOnNullInput() {
+        assertThrows(NullPointerException.class, () -> new StringCalculator().add(null));
     }
 }
