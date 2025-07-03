@@ -33,4 +33,13 @@ public class StringCalculatorTest {
         input.append("1");
         assertEquals(2_000_001L, new StringCalculator().add(input.toString()));
     }
+
+    // Step 3 - Allow to handle \n (new lines) between numbers
+    @Test
+    void allowsNewLineAsDelimiterAlongWithComma() {
+        assertEquals(6, new StringCalculator().add("1\n2,3"));
+        // ',' and '\n' possible next to next causing empty string
+        assertEquals(10, new StringCalculator().add("1,\n2,3,4"));
+        assertEquals(10, new StringCalculator().add("1,\n2,3\n4"));
+    }
 }
