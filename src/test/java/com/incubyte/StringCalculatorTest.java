@@ -85,4 +85,10 @@ public class StringCalculatorTest {
     void supportsMultipleSingleCharDelimiters() {
         assertEquals(6, new StringCalculator().add("//[*][%]\n1*2%3"));
     }
+
+    // Step 12 - Allow multiple delimiters of any length
+    @Test
+    void supportsMultipleDelimitersOfAnyLength() {
+        assertEquals(6, new StringCalculator().add("//[**][%%]\n1**2%%3"));
+    }
 }
