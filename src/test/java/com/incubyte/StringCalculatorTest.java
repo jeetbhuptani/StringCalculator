@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
+    // POSITIVE TEST CASES
     // Step 1.1 Empty String
     @Test
     void returnsZeroOnEmptyString() {
@@ -20,19 +21,15 @@ public class StringCalculatorTest {
 
     // Step 1.3 Comma separated values
     @Test
-    void returnsSumofNumbersSeperatedByComma() {
+    void returnsSumOfNumbersSeparatedByComma() {
         assertEquals(6, new StringCalculator().add("1,5"));
         assertEquals(10, new StringCalculator().add("1,2,3,4"));
     }
 
-    // Step 2 - Allow any amount of numbers
+    // Step 2 - Allow any number of numbers
     @Test
     void handlesLargeSumWithoutOverflow() {
-        StringBuilder input = new StringBuilder();
-        for(int i = 0; i< 2_000_000; i++)
-            input.append("1,");
-        input.append("1");
-        assertEquals(2_000_001L, new StringCalculator().add(input.toString()));
+        assertEquals(2_000_001L, new StringCalculator().add("1,".repeat(2_000_000)));
     }
 
     // Step 3 - Allow to handle \n (new lines) between numbers
@@ -51,9 +48,7 @@ public class StringCalculatorTest {
     // Step 6 - Return the numbers if multiple negative numbers
     @Test
     void throwsExceptionOnNegativeNumbers() {
-        Exception e = assertThrows(IllegalArgumentException.class, () -> {
-            new StringCalculator().add("1, -2, 3, -4");
-        });
+        Exception e = assertThrows(IllegalArgumentException.class, () -> new StringCalculator().add("1, -2, 3, -4"));
         assertEquals("negative numbers not allowed [-2, -4]", e.getMessage());
     }
 
