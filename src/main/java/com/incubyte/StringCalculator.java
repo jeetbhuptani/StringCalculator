@@ -2,6 +2,8 @@ package com.incubyte;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
     private int callCount = 0;
@@ -20,8 +22,19 @@ public class StringCalculator {
         String delimiter = ",|\n";
         if(numbers.startsWith("//")){
             int newlineIndex = numbers.indexOf("\n");
-            delimiter = numbers.substring(2, newlineIndex);
+            String delimiterPart = numbers.substring(2, newlineIndex);
             numbers = numbers.substring(newlineIndex + 1);
+
+            if(delimiterPart.startsWith("[") && delimiterPart.endsWith("]")){
+                List<String> delimiters = new ArrayList<>();
+                Matcher m = Pattern.compile("\\[(.*?)]").matcher(delimiterPart);
+                while(m.find())
+                    delimiters.add(Pattern.quote(m.group(1)));
+                delimiter = String.join("|", delimiters);
+            } else {
+                delimiter = Pattern.quote(delimiterPart);
+                System.out.println(delimiterPart);
+            }
         }
 
         String[] parts = numbers.split(delimiter);
@@ -33,6 +46,7 @@ public class StringCalculator {
             // Collect negative values
             int num = Integer.parseInt(part.trim());
             if(num < 0) negatives.add(num);
+            // Step 9 - Ignore numbers greater than 1000
             if(num <= 1000)
                 sum += num;
         }
@@ -43,6 +57,7 @@ public class StringCalculator {
         return sum;
     }
 
+    // Step 7 - To return the count of add() method invocations
     public int getCalledCount() {
         return callCount;
     }

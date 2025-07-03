@@ -74,4 +74,10 @@ public class StringCalculatorTest {
         assertEquals(2, new StringCalculator().add("2,1001"));
         assertEquals(1002, new StringCalculator().add("2,1000"));
     }
+
+    // Step 10 - Delimiters can be of any length
+    @Test
+    void supportsDelimiterOfAnyLength() {
+        assertEquals(6, new StringCalculator().add("//[***]\n1***2***3"));
+    }
 }
