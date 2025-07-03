@@ -49,6 +49,7 @@ public class StringCalculatorTest {
     }
 
     // Step 5 - Throw Exception on Negative Numbers
+    // Step 6 - Return the numbers if multiple negative numbers
     @Test
     void throwsExceptionOnNegativeNumbers() {
         Exception e = assertThrows(IllegalArgumentException.class, () -> {
@@ -57,5 +58,12 @@ public class StringCalculatorTest {
         assertEquals("negative numbers not allowed [-2, -4]", e.getMessage());
     }
 
-
+    // Step
+    @Test
+    void trackAddMethodInvokedCalls() {
+        StringCalculator sc = new StringCalculator();
+        sc.add("1, 2");
+        sc.add("3, 4");
+        assertEquals(2, sc.getCalledCount());
+    }
 }

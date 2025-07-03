@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringCalculator {
+    private int callCount = 0;
+
     public int add(String numbers){
+        // Increment Call Count
+        callCount++;
 
         // Step 1.1 - Return 0 for Empty Values
         if(numbers.isEmpty()) return 0;
@@ -36,5 +40,9 @@ public class StringCalculator {
             throw new IllegalArgumentException("negative numbers not allowed "+negatives.toString());
         }
         return sum;
+    }
+
+    public int getCalledCount() {
+        return callCount;
     }
 }
