@@ -39,15 +39,13 @@ public class StringCalculatorTest {
     @Test
     void allowsNewLineAsDelimiterAlongWithComma() {
         assertEquals(6, new StringCalculator().add("1\n2,3"));
-        // ',' and '\n' possible next to next causing empty string
-        assertEquals(10, new StringCalculator().add("1,\n2,3,4"));
-        assertEquals(10, new StringCalculator().add("1,\n2,3\n4"));
     }
 
     // Step 4 - Support Custom Delimiter
     @Test
     void supportsCustomDelimiterDefinedInHeader(){
         assertEquals(3, new StringCalculator().add("//;\n1;2"));
+        assertEquals(10, new StringCalculator().add("//;|-|'\n1;2-3'4"));
     }
 
     // Step 5 - Throw Exception on Negative Numbers
@@ -58,4 +56,6 @@ public class StringCalculatorTest {
         });
         assertEquals("negative numbers not allowed [-2, -4]", e.getMessage());
     }
+
+
 }

@@ -12,7 +12,7 @@ public class StringCalculator {
         // Step 1.2 - Return number for given string with Single Number
         // Step 1.3 - Return sum of comma separate values
         // Step 3 - Allowed \n values
-        // Step 4 - Allowed Delimiters
+        // Step 4 - Allowed Custom Delimiters
         String delimiter = ",|\n";
         if(numbers.startsWith("//")){
             int newlineIndex = numbers.indexOf("\n");
@@ -26,8 +26,6 @@ public class StringCalculator {
         List<Integer> negatives = new ArrayList<>();
 
         for(String part: parts){
-            // Solution - for: ',' and '\n' possible next to next causing empty("") string
-            if(part.trim().isEmpty()) continue;
             // Collect negative values
             int num = Integer.parseInt(part.trim());
             if(num < 0) negatives.add(num);
