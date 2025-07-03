@@ -33,7 +33,8 @@ public class StringCalculator {
             // Collect negative values
             int num = Integer.parseInt(part.trim());
             if(num < 0) negatives.add(num);
-            sum += num;
+            if(num <= 1000)
+                sum += num;
         }
 
         if(!negatives.isEmpty()){

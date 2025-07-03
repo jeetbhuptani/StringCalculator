@@ -58,12 +58,20 @@ public class StringCalculatorTest {
         assertEquals("negative numbers not allowed [-2, -4]", e.getMessage());
     }
 
-    // Step
+    // Step 7 - Add getCalledCount() to check add() invocations
     @Test
     void trackAddMethodInvokedCalls() {
         StringCalculator sc = new StringCalculator();
         sc.add("1, 2");
         sc.add("3, 4");
         assertEquals(2, sc.getCalledCount());
+    }
+
+    // Step 8 skipped (.NET only)
+    // Step 9 - Ignore Numbers > 1000
+    @Test
+    void numbersGreaterThan1000Ignored() {
+        assertEquals(2, new StringCalculator().add("2,1001"));
+        assertEquals(1002, new StringCalculator().add("2,1000"));
     }
 }
