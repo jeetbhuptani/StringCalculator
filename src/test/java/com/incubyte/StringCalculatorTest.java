@@ -3,6 +3,7 @@ package com.incubyte;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
     // Step 1.1 Empty String
@@ -41,5 +42,11 @@ public class StringCalculatorTest {
         // ',' and '\n' possible next to next causing empty string
         assertEquals(10, new StringCalculator().add("1,\n2,3,4"));
         assertEquals(10, new StringCalculator().add("1,\n2,3\n4"));
+    }
+
+    // Step 4 - Support Custom Delimiter
+    @Test
+    void supportsCustomDelimiterDefinedInHeader(){
+        assertEquals(3, new StringCalculator().add("//;\n1;2"));
     }
 }
