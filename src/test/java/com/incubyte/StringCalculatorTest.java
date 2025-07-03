@@ -2,6 +2,8 @@ package com.incubyte;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.regex.PatternSyntaxException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -85,5 +87,18 @@ public class StringCalculatorTest {
     @Test
     void supportsMultipleDelimitersOfAnyLength() {
         assertEquals(6, new StringCalculator().add("//[**][%%]\n1**2%%3"));
+    }
+
+    // NEGATIVE TEST CASES
+    // Contains alphabets
+    @Test
+    void throwsExceptionForNonNumericInput() {
+        assertThrows(NumberFormatException.class, () -> new StringCalculator().add("1,a,3"));
+    }
+
+    // Follow strict [] rule for delimiters as per the Kata
+    @Test
+    void doesNotAcceptMultipleUnbracketedMultiCharDelimiter() {
+        assertThrows(IllegalArgumentException.class, () -> new StringCalculator().add("//***\n1***2***3"));
     }
 }

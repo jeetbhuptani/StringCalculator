@@ -54,6 +54,9 @@ public class StringCalculator {
 
     // Delimiters Extraction
     private String extractDelimiters(String delimiterPart) {
+        if(delimiterPart.length() > 1 && !delimiterPart.startsWith("["))
+            throw new IllegalArgumentException("Multi-character delimiter must be enclosed in brackets");
+
         if(delimiterPart.startsWith("[") && delimiterPart.endsWith("]")){
             List<String> delimiters = new ArrayList<>();
             Matcher m = Pattern.compile("\\[(.*?)]").matcher(delimiterPart);
@@ -63,4 +66,6 @@ public class StringCalculator {
         } else
             return Pattern.quote(delimiterPart);
     }
+
+
 }
